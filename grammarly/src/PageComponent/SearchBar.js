@@ -4,9 +4,9 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 function SearchBar() {
   return (
     <div className="searchBox">
-        <input type="text" placeholder="Search Here"></input>
+        <input className="searchText" type="text" placeholder="Search Here ... "></input>
         <label className="icon">
-            <FaMagnifyingGlass />
+            <FaMagnifyingGlass/>
         </label>
     </div>
   );

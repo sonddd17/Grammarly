@@ -9,8 +9,8 @@ import SearchBar from "./SearchBar";
 function Trash() {
   return (
     <div className="content-container">
-      <SearchBar />
       <div className="DocumentList">
+        <SearchBar />
         <div className="newDocumentItem">
           <div class="box">Box 2</div>
           <div class="box">Box 3</div>
