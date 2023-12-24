@@ -13,6 +13,7 @@ import { useState } from "react"; // import useState hook
 import MyGrammarly from "./MyGrammarly";
 import Trash from "./Trash";
 import Account from "./Account";
+import Premium from "./Premium";
 function MainPage() {
   const [activeItem, setActiveItem] = useState("MyGrammarly"); // create a state variable to store the active item name
   function handleClick(itemName) {
@@ -21,10 +22,7 @@ function MainPage() {
     console.log(itemName);
   }
 
-  function Premium() {
-    return <div>Premium page</div>;
-  }
-
+  
   return (
     <div className="container">
       <BrowserRouter>
@@ -63,7 +61,7 @@ function MainPage() {
             onClick={() => handleClick("Premium")}
           >
             <FaRegStar />
-            <Link to={{ pathname: "/premium" }}>Premium</Link>
+            <Link to={{ pathname: "/Premium" }}>Premium</Link>
           </div>
         </div>
         <div className="PageContent">
