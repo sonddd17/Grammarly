@@ -1,28 +1,32 @@
 import React from "react";
-import {
-  FaFolderPlus,
-} from "react-icons/fa6";
+import { FaFolderPlus, FaPenFancy, FaTrash } from "react-icons/fa6";
 import SearchBar from "./SearchBar";
 function MyGrammarly() {
   return (
     <div className="content-container">
-
       <div className="DocumentList">
         <SearchBar />
         <div className="newDocumentItem">
-          <div class="upload">
+          <div className="upload">
             <FaFolderPlus />
-            <a>
-              New
-            </a>
+            <a>New</a>
           </div>
-          <div class="box">
-            <h3>Title</h3>
-            <a>date/month/year</a>
-            <div className="text">
-              <a>cawefjioqhfuiqhfiuqwhfhqifohqiofhqwiofgqowfhqhofgiuqfguigfoq</a>
+          <div className="box">
+            <div className="textContent">
+              <h3>Title</h3>
+              <h4>date/month/year</h4>
+              <a>
+                
+              </a>
             </div>
-
+            <div className="editOption">
+              <div className="trash-btn">
+                <FaTrash />
+              </div>
+              <div className="edit-btn">
+                <FaPenFancy />
+              </div>
+            </div>
           </div>
         </div>
       </div>
