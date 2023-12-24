@@ -85,11 +85,11 @@
   margin: auto;
 }
 .box {
-  width: 140px;
-  height: 172px;
+  width: 150px;
+  height: 180px;
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  margin: 20px;
   float: left;
   box-sizing: border-box;
   transition: box-shadow 0.2s ease-in-out;
@@ -106,9 +106,9 @@
 }
 
 .upload {
-  width: 140px;
-  height: 172px;
-  margin: 10px;
+  width: 150px;
+  height: 180px;
+  margin: 20px;
   float: left;
   box-sizing: border-box;
   box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
@@ -193,7 +193,7 @@
   height: 500px;
   display: flex;
   flex-direction: column;
-  margin: 100px;
+  margin: 50px;
   font: 16px arial;
   gap: 30px;
 }

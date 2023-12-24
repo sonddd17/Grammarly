@@ -28,6 +28,57 @@ function MyGrammarly() {
               </div>
             </div>
           </div>
+          <div className="box">
+            <div className="textContent">
+              <h3>Title</h3>
+              <h4>date/month/year</h4>
+              <a>
+                
+              </a>
+            </div>
+            <div className="editOption">
+              <div className="trash-btn">
+                <FaTrash />
+              </div>
+              <div className="edit-btn">
+                <FaPenFancy />
+              </div>
+            </div>
+          </div>
+          <div className="box">
+            <div className="textContent">
+              <h3>Title</h3>
+              <h4>date/month/year</h4>
+              <a>
+                
+              </a>
+            </div>
+            <div className="editOption">
+              <div className="trash-btn">
+                <FaTrash />
+              </div>
+              <div className="edit-btn">
+                <FaPenFancy />
+              </div>
+            </div>
+          </div>
+          <div className="box">
+            <div className="textContent">
+              <h3>Title</h3>
+              <h4>date/month/year</h4>
+              <a>
+                
+              </a>
+            </div>
+            <div className="editOption">
+              <div className="trash-btn">
+                <FaTrash />
+              </div>
+              <div className="edit-btn">
+                <FaPenFancy />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
