@@ -206,9 +206,44 @@
   padding-left: 50px;
   color: blue;
   cursor: pointer;
-}.update:hover{
+}
+.update:hover {
   text-decoration: underline;
 }
 .pass {
   -webkit-text-security: disc;
 }
+.Premium-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  
+}
+.Premium-box {
+  display: flex;
+  width: 250px;
+  height: 350px;
+  flex-direction: column;
+  margin: 20px;
+  float: left;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  word-wrap: break-word;
+  /* Set the initial size, opacity, and order of the boxes */
+  transform: scale(0.8);
+  opacity: 0.5;
+  order: 0;
+}
+
+button {
+  margin: 20px;
+}
+
