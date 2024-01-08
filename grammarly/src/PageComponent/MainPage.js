@@ -4,25 +4,34 @@ import {
   FaHouseChimney,
   FaRegCircleUser,
   FaTrashCan,
-  FaAppStore,
+  
   FaRegStar,
 } from "react-icons/fa6";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"; // import React Router components
 
-import { useState } from "react"; // import useState hook
+import { useEffect, useState } from "react"; // import useState hook
 import MyGrammarly from "./MyGrammarly";
 import Trash from "./Trash";
 import Account from "./Account";
 import Premium from "./Premium";
+
 function MainPage() {
-  const [activeItem, setActiveItem] = useState("MyGrammarly"); // create a state variable to store the active item name
+  const [activeItem, setActiveItem] = useState(
+    localStorage.getItem("activeItem") || "MyGrammarly"
+  );
+
+  useEffect(() => {
+    localStorage.setItem("activeItem", activeItem);
+  }, [activeItem]);
+
+  // create a state variable to store the active item name
+
   function handleClick(itemName) {
     // set the state to the item name
     setActiveItem(itemName);
     console.log(itemName);
   }
 
-  
   return (
     <div className="container">
       <BrowserRouter>
