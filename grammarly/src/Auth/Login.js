@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import "./Auth.css";
-const emailSet = "sonddd17@gmail.com"
-const passSet = "17102001"
-function Login() {
+
+function Login({ onLoginSuccess }) {
+  // Pre-set credentials
+  const emailSet = "sonddd17@gmail.com";
+  const passSet = "17102001";
+
   // State variables for email and password
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,10 +20,14 @@ function Login() {
     setPassword(event.target.value);
   };
 
-  // Function to handle login (just logs the current state)
+  // Function to handle login
   const handleLogin = () => {
-    console.log('Email:', email, 'Password:', password);
-    // Here you can add logic to handle the login
+    if (email === emailSet && password === passSet) {
+      console.log('Login Succeeded');
+      onLoginSuccess(); // Call the callback function
+    } else {
+      console.log('Login Failed');
+    }
   };
 
   return (
