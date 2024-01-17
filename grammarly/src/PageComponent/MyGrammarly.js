@@ -1,54 +1,40 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import { FaFolderPlus, FaPenFancy, FaTrash, FaFileArrowUp, FaCircleCheck, FaFileImage, FaPaperPlane, FaTrashCan } from "react-icons/fa6";
 import SearchBar from "./SearchBar";
-import { useState } from "react";
+import DocumentCard from "./homepage/DocumentCard";
+import "../Styles/Uploader.css";
+import "../Styles/DocumentCard.css";
+import S3Singleton from "../models/S3Singleton";
+import { S3_BUCKET } from "../models/S3Singleton";
 
-import "../Styles/Uploader.css"
-
-import AWS from "aws-sdk"
 
 function MyGrammarly() {
-  
+
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [fetchedDocs, setFetchedDocs] = useState([]);
+
   // ---- File upload to S3 ----
   // Create state to store file
   const [file, setFile] = useState(null);
 
   // Upload function
   const uploadFile = async () => {
-
-    // Define bucket name and region
-    const S3_BUCKET = "grosana-bucket";
-    const REGION = "ap-southeast-1"
-
-    // Define access key to communicate with AWS
-    AWS.config.update({
-      accessKeyId: "AKIARLPZBW5ZAQESIAVQ",
-      secretAccessKey: "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",
-    });
-
-    // Define S3 instance
-    const s3 = new AWS.S3({
-      params: { Bucket: S3_BUCKET },
-      region: REGION,
-    })
-
-    // Define file parameters
-    const params = {
+    const instance = await S3Singleton.getInstance()
+    const request = instance.putObject({
       Bucket: S3_BUCKET,
       Key: file.name,
       Body: file,
-    };
-
-    // Upload file to S3
-    var upload = s3.putObject(params).on("httpUploadProgress", (event) => {
-      console.log(
-        "Uploading " + parseInt((event.loaded * 100) / event.total) + "%" 
-      );
+    }).on("httpUploadProgress", (event) => {
+        console.log("Uploading " + parseInt((event.loaded * 100) / event.total) + "%" );
     }).promise()
 
-    await upload.then((err, data) => {
-      console.log(err);
+    await request.then((data) => {
+      // Add the file to the list of uploaded files
+      setUploadedFiles(prevFiles => [...prevFiles, file.name]);
       alert("File uploaded successfully.");
+    }).catch((err) => {
+      console.log(err);
+      alert("Error occurred during file upload.");
     });
   };
 
@@ -58,6 +44,59 @@ function MyGrammarly() {
     setFile(file) // Change file state
   };
 
+  const fetchFile = (fileName) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const s3 = await S3Singleton.getInstance();
+            s3.getObject(
+                {
+                    Bucket: S3_BUCKET,
+                    Key: fileName,
+                },
+                (err, data) => {
+                    if (err) {
+                      console.log(err);
+                      reject(err);
+                      return;
+                    }
+                    if (data) {
+                      const document = data.Body.toString('binary');
+                      resolve(document);
+                    }
+                }
+            );
+        } catch (e) {
+            console.log(e);
+            reject(e);
+        }
+    });
+  }
+
+  const fetchAllFiles = async (uploadedFiles) => {
+    const fetchedFiles = [];
+    for (const fileName of uploadedFiles) {
+        try {
+            const fetchedFile = await fetchFile(fileName);
+            fetchedFiles.push({ fileName, fetchedFile });
+        } catch (e) {
+            console.log(`Error fetching file ${fileName}: `, e);
+        }
+    }
+    return fetchedFiles;
+  }
+
+  const fetchAndDisplayFiles = async () => {
+    const files = await fetchAllFiles(uploadedFiles);
+    setFetchedDocs(files);
+  };
+
+
+  useEffect(() => {
+    if (uploadedFiles.length > 0) {
+      fetchAndDisplayFiles();
+    }
+  }, [uploadedFiles]); 
+
 
   return (
     <div className="content-container">
@@ -66,9 +105,7 @@ function MyGrammarly() {
         <div className="newDocumentItem">
           <div className="file-upload-container">
             <div className="file-upload">
-              <form
-                onClick={() => document.querySelector(".input-field").click()}
-                >
+              <form onClick={() => document.querySelector(".input-field").click()}>
                 <input 
                   type="file" 
                   className='input-field' hidden 
@@ -105,74 +142,12 @@ function MyGrammarly() {
             </button>
           </div>
 
-          <div className="box">
-            <div className="textContent">
-              <h3>Title</h3>
-              <h4>date/month/year</h4>
-              <a>
-                
-              </a>
-            </div>
-            <div className="editOption">
-              <div className="trash-btn">
-                <FaTrash />
-              </div>
-              <div className="edit-btn">
-                <FaPenFancy />
-              </div>
-            </div>
-          </div>
-          <div className="box">
-            <div className="textContent">
-              <h3>Title</h3>
-              <h4>date/month/year</h4>
-              <a>
-                
-              </a>
-            </div>
-            <div className="editOption">
-              <div className="trash-btn">
-                <FaTrash />
-              </div>
-              <div className="edit-btn">
-                <FaPenFancy />
-              </div>
-            </div>
-          </div>
-          <div className="box">
-            <div className="textContent">
-              <h3>Title</h3>
-              <h4>date/month/year</h4>
-              <a>
-                
-              </a>
-            </div>
-            <div className="editOption">
-              <div className="trash-btn">
-                <FaTrash />
-              </div>
-              <div className="edit-btn">
-                <FaPenFancy />
-              </div>
-            </div>
-          </div>
-          <div className="box">
-            <div className="textContent">
-              <h3>Title</h3>
-              <h4>date/month/year</h4>
-              <a>
-                
-              </a>
-            </div>
-            <div className="editOption">
-              <div className="trash-btn">
-                <FaTrash />
-              </div>
-              <div className="edit-btn">
-                <FaPenFancy />
-              </div>
-            </div>
-          </div>
+          {/* Show fetched document as card view */}
+          <div className="documents-container">
+            {fetchedDocs.map(doc => (
+              <DocumentCard key={doc.fileName} doc={doc} />
+            ))}
+          </div>          
         </div>
       </div>
     </div>

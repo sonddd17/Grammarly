@@ -21,7 +21,7 @@ SQLALCHEMY_POOL_TIMEOUT = 20
 
 # ---- Models ----
 class Document(db.Model):
-    __tablename__ = 'document'
+    __tablename__ = 'Document'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
@@ -32,7 +32,7 @@ class Document(db.Model):
 
 
 class Payment(db.Model):
-    __tablename__ = 'payment'
+    __tablename__ = 'Payment'
 
     id = db.Column(db.Integer, primary_key=True)
     payment_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -42,7 +42,7 @@ class Payment(db.Model):
 
 
 class User(db.Model):
-    __tablename__ = 'user'
+    __tablename__ = 'User'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20))

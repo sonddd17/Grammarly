@@ -1,0 +1,18 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "database-grosana.cqkhlca7jyyx.ap-southeast-1.rds.amazonaws.com",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "Grosana db connect",
+            "database": "grosana_db",
+            "username": "admin",
+            "askForPassword": true
+        }
+    ]
+}

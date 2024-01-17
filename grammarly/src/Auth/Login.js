@@ -26,6 +26,7 @@ function Login({ onLoginSuccess }) {
       console.log('Login Succeeded');
       onLoginSuccess(); // Call the callback function
     } else {
+      alert("Login failed")
       console.log('Login Failed');
     }
   };
