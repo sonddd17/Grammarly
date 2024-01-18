@@ -2,21 +2,18 @@ import React, { useState } from "react";
 import Register from "./Auth/Register.js";
 import Login from "./Auth/Login.js";
 import MainPage from "./PageComponent/MainPage";
+import useToken from "./Auth/useToken";
 import "./App.css";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const handleLoginSuccess = () => {
-    setIsLoggedIn(true);
-  };
+  const { token, setToken, removeToken } = useToken();
 
   return (
     <div>
-      {isLoggedIn ? (
-        <MainPage />
+      {token === null || token === undefined ? (
+        <Login onLoginSuccess={setToken} />
       ) : (
-        <Login onLoginSuccess={handleLoginSuccess} />
+        <MainPage token={token} setToken={setToken} />
       )}
     </div>
   );
