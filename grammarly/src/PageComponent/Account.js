@@ -1,7 +1,19 @@
 import React from "react";
+import axios from "axios";
 import "../App.css";
 
-function Account() {
+function Account(props) {
+
+  /*const [profileData, setProfileData] = useState(null)
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const email = localStorage.getItem('email');*/
+
+
+  
   return (
     <div className="Account-container">
       <h1>Account Setting</h1>

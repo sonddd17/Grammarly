@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "./Auth.css";
 
-function Login({ onLoginSuccess }) {
+function Login({ onLoginSuccess, onSwitchToSignUp }) {
   // Pre-set credentials
-  const emailSet = "sonddd17@gmail.com";
-  const passSet = "17102001";
+  /*const emailSet = "sonddd17@gmail.com";
+  const passSet = "17102001";*/
 
   // State variables for email and password
   const [email, setEmail] = useState('');
@@ -22,13 +24,40 @@ function Login({ onLoginSuccess }) {
 
   // Function to handle login
   const handleLogin = () => {
-    if (email === emailSet && password === passSet) {
-      console.log('Login Succeeded');
-      onLoginSuccess(); // Call the callback function
-    } else {
-      alert("Login failed")
-      console.log('Login Failed');
-    }
+    // Sending a POST request to the login endpoint
+    axios({
+      method: "POST",
+      url: "http://127.0.0.1:5000/logintoken",
+      data: {
+        email: email,
+        password: password,
+      },
+    })
+      .then((response) => {
+        // If login is successful
+        console.log(response);
+        
+        onLoginSuccess(response.data.access_token);
+        alert("Successfully Login");
+        // Store the email in localStorage
+        localStorage.setItem("email", email);
+        
+      })
+      .catch((error) => {
+        // If there's an error
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          // If the error status is 401 (Unauthorized)
+          if (error.response.status === 401) {
+            alert("Invalid credentials");
+          }
+        }
+      });
+    // Clear the login form
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -48,7 +77,11 @@ function Login({ onLoginSuccess }) {
           onChange={handlePasswordChange}
         ></input>
         <div className="login-btn" onClick={handleLogin}>Login</div>
-        <div className="question">Don't have an account yet?</div>
+        <div className="question">
+          <span className="switch-btn" onClick={onSwitchToSignUp}>
+          Don't have an account ? Sign Up
+          </span>
+        </div>
         <p className="text">Or login using</p>
         <div className="altLogin">
           <div className="facebook"></div>
