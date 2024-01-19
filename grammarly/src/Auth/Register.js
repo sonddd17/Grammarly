@@ -9,6 +9,11 @@ function Register({ onRegisterSuccess}) {
   const [password, setPassword] = useState("");
   const [reEnteredPassword, setReEnteredPassword] = useState("");
 
+  // State variable for validation errors
+  const [validationErrors, setValidationErrors] = useState({});
+
+  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])(?=.*[a-zA-Z]).{8,}$/;
+
   // Function to update state for name
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -31,6 +36,32 @@ function Register({ onRegisterSuccess}) {
 
   // Function to handle registration (just logs the current state)
   const handleRegister = () => {
+    // Reset validation errors
+    setValidationErrors({});
+
+    // Validate input fields
+    const errors = {};
+    if (!name.trim()) {
+      errors.name = "Name is required";
+    }
+    if (!email.trim()) {
+      errors.email = "Email is required";
+    }
+    if (!password.trim()) {
+      errors.password = "Password is required";
+    }
+    if (password !== reEnteredPassword) {
+      errors.reEnteredPassword = "Passwords do not match";
+    }
+    // Check password strength
+    if (!passwordRegex.test(password)) {
+      errors.password = "Password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 digit, and 1 special character";
+    }
+    // If there are validation errors, update the state and return
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      return;
+    }
     // Sending a POST request to the sign up endpoint
     axios({
       method: "POST",
@@ -77,12 +108,14 @@ function Register({ onRegisterSuccess}) {
           value={name}
           onChange={handleNameChange}
         ></input>
+        {validationErrors.name && <p className="error-text">{validationErrors.name}</p>}
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={handleEmailChange}
         ></input>
+        {validationErrors.email && <p className="error-text">{validationErrors.email}</p>}
         <input
           className="pass"
           type="password"
@@ -90,6 +123,7 @@ function Register({ onRegisterSuccess}) {
           value={password}
           onChange={handlePasswordChange}
         ></input>
+        {validationErrors.password && <p className="error-text">{validationErrors.password}</p>}
         <input
           className="re-pass"
           type="password"
@@ -97,6 +131,9 @@ function Register({ onRegisterSuccess}) {
           value={reEnteredPassword}
           onChange={handleReEnteredPasswordChange}
         ></input>
+        {validationErrors.reEnteredPassword && (
+          <p className="error-text">{validationErrors.reEnteredPassword}</p>
+        )}
         <div className="login-btn" onClick={handleRegister}>
           Register
         </div>

@@ -248,3 +248,14 @@ button {
   ;
 }
 
+.logOut-text {
+  display: flex;
+  padding-left: 20px;
+  color: rgb(173, 2, 2);
+}
+
+.logOut-text:hover {
+  color: red;
+  cursor: pointer;
+}
+

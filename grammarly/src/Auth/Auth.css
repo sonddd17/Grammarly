@@ -87,3 +87,8 @@
 .question:hover {
   text-decoration: underline;
 }
+.error-text {
+  color: red;
+  font-size: smaller;
+  text-align: center;
+}

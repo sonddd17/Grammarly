@@ -4,18 +4,21 @@ import {
   FaHouseChimney,
   FaRegCircleUser,
   FaTrashCan,
-  
+  FaPowerOff,
   FaRegStar,
 } from "react-icons/fa6";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"; // import React Router components
+import axios from "axios";
 
 import { useEffect, useState } from "react"; // import useState hook
 import MyGrammarly from "./MyGrammarly";
 import Trash from "./Trash";
 import Account from "./Account";
 import Premium from "./Premium";
+import Login from "../Auth/Login";
+import App from "../App";
 
-function MainPage() {
+function MainPage(props) {
   const [activeItem, setActiveItem] = useState(
     localStorage.getItem("activeItem") || "MyGrammarly"
   );
@@ -26,10 +29,35 @@ function MainPage() {
 
   // create a state variable to store the active item name
 
+
   function handleClick(itemName) {
-    // set the state to the item name
-    setActiveItem(itemName);
-    console.log(itemName);
+    if (itemName === "Logout") {
+      Logout();
+      console.log(itemName)
+    } else {
+      // set the state to the item name
+      setActiveItem(itemName);
+      console.log(itemName);
+    }
+  }
+
+  function Logout() {
+    axios({
+      method: "POST",
+      url:"http://127.0.0.1:5000/logout",
+    })
+    .then((response) => {
+        props.token()
+        props.removeToken()
+        localStorage.removeItem('email')
+        
+    }).catch((error) => {
+        if (error.response) {
+            console.log(error.response)
+            console.log(error.response.status)
+            console.log(error.response.headers)
+        }
+    })
   }
 
   return (
@@ -72,6 +100,15 @@ function MainPage() {
             <FaRegStar />
             <Link to={{ pathname: "/Premium" }}>Premium</Link>
           </div>
+
+          <div
+            className={`item ${activeItem === "Logout" ? "active" : ""}`}
+            onClick={() => handleClick("Logout")}
+          >
+            <FaPowerOff />
+            <div className="logOut-text">Log out</div>
+          </div>
+
         </div>
         <div className="PageContent">
           <Routes>
@@ -80,6 +117,7 @@ function MainPage() {
             <Route path="/Trash" element={<Trash />} />
             <Route path="/Account" element={<Account />} />
             <Route path="/Premium" element={<Premium />} />
+            <Route path="/App" element={<App />} />
           </Routes>
         </div>
       </BrowserRouter>
