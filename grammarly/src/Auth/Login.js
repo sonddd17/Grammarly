@@ -78,9 +78,8 @@ function Login({ onLoginSuccess, onSwitchToSignUp }) {
         ></input>
         <div className="login-btn" onClick={handleLogin}>Login</div>
         <div className="question">
-          Don't have an account yet?
           <span className="switch-btn" onClick={onSwitchToSignUp}>
-            Sign Up
+          Don't have an account ? Sign Up
           </span>
         </div>
         <p className="text">Or login using</p>
