@@ -119,7 +119,8 @@ def my_profile(getemail):
   
     return response_body
 
-
+# add CORS support for our frontend pages
+cors = CORS(app, resources={r"": {"origins": ["https://localhost/", "http://localhost/*"]}})
 if __name__ == "__main__":
     app.run(debug=True)
 
