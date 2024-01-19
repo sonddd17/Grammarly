@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa6";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"; // import React Router components
 import axios from "axios";
-
+import app_logo from '../assets/logo-color.png'
 import { useEffect, useState } from "react"; // import useState hook
 import MyGrammarly from "./MyGrammarly";
 import Trash from "./Trash";
@@ -67,8 +67,8 @@ function MainPage(props) {
         <div className="Menu">
           <div className="logo">
             <img
-              src="logo192.png"
-              alt="hahahaha something went wrong and i don't know"
+              src={app_logo}
+              alt="App icon"
             ></img>
           </div>
           <div
@@ -76,7 +76,7 @@ function MainPage(props) {
             onClick={() => handleClick("MyGrammarly")}
           >
             <FaHouseChimney />
-            <Link to={{ pathname: "/MyGrammarly" }}>MyGrammarly</Link>
+            <Link to={{ pathname: "/MyGrammarly" }}>Homepage</Link>
           </div>
           <div
             className={`item ${activeItem === "Trash" ? "active" : ""}`}

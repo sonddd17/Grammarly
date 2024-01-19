@@ -4,6 +4,7 @@ import Login from "./Auth/Login.js";
 import MainPage from "./PageComponent/MainPage";
 import useToken from "./Auth/useToken";
 import "./App.css";
+import "./configs/aws-exports.js";
 
 function App() {
   const { token, setToken, removeToken } = useToken();
@@ -20,7 +21,10 @@ function App() {
 
   return (
     <div>
-      {token === null || token === undefined ? (
+      <MainPage token={token} setToken={setToken} />
+
+
+      {/* {token === null || token === undefined ? (
         showRegister ? (
           <Register onRegisterSuccess={handleRegisterSuccess} />
         ) : (
@@ -40,7 +44,7 @@ function App() {
             {showRegister ? "Login" : "Sign Up"}
           </span>
         </div>
-      )}
+      )} */}
     </div>
   );
 }
