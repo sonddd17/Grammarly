@@ -3,11 +3,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Auth.css";
 
-function Login({ onLoginSuccess }) {
+function Login({ onLoginSuccess, onSwitchToSignUp }) {
   // Pre-set credentials
   /*const emailSet = "sonddd17@gmail.com";
   const passSet = "17102001";*/
-  const navigate = useNavigate();
 
   // State variables for email and password
   const [email, setEmail] = useState('');
@@ -78,7 +77,12 @@ function Login({ onLoginSuccess }) {
           onChange={handlePasswordChange}
         ></input>
         <div className="login-btn" onClick={handleLogin}>Login</div>
-        <div className="question">Don't have an account yet?</div>
+        <div className="question">
+          Don't have an account yet?
+          <span className="switch-btn" onClick={onSwitchToSignUp}>
+            Sign Up
+          </span>
+        </div>
         <p className="text">Or login using</p>
         <div className="altLogin">
           <div className="facebook"></div>

@@ -2,6 +2,7 @@ import React from "react";
 import "../App.css";
 
 function Account() {
+  
   return (
     <div className="Account-container">
       <h1>Account Setting</h1>

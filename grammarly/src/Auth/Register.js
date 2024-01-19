@@ -1,11 +1,18 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./Auth.css";
 
-function Register() {
-  // State variables for email, password, and re-entered password
+function Register({ onRegisterSuccess}) {
+  // State variables for name, email, password, and re-entered password
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [reEnteredPassword, setReEnteredPassword] = useState("");
+
+  // Function to update state for name
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
 
   // Function to update state for email
   const handleEmailChange = (event) => {
@@ -24,14 +31,39 @@ function Register() {
 
   // Function to handle registration (just logs the current state)
   const handleRegister = () => {
-    console.log(
-      "Email:",
-      email,
-      "Password:",
-      password,
-      "Re-entered Password:",
-      reEnteredPassword
-    );
+    // Sending a POST request to the sign up endpoint
+    axios({
+      method: "POST",
+      url: "http://127.0.0.1:5000/signup",
+      data: {
+        name: name,
+        email: email,
+        password: password,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        alert("Successfully registered! Please log in.");
+        onRegisterSuccess();
+      })
+      .catch((error) => {
+        // If there's an error
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          // If the error status is 401 (Unauthorized)
+          if (error.response.status === 409) {
+            alert("Email has been taken");
+          }
+        }
+      });
+    // Clear the registration form
+    setName("");
+    setEmail("");
+    setPassword("");
+    setReEnteredPassword("");
+
     // Here you can add logic to handle the registration
   };
 
@@ -39,6 +71,12 @@ function Register() {
     <div className="page">
       <div className="cover">
         <h1>Register</h1>
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={handleNameChange}
+        ></input>
         <input
           type="email"
           placeholder="Email"
@@ -62,6 +100,8 @@ function Register() {
         <div className="login-btn" onClick={handleRegister}>
           Register
         </div>
+
+        
 
         <p className="text">Or Register using</p>
         <div className="altLogin">
