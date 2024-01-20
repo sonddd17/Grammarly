@@ -1,4 +1,4 @@
-.document-card {
+
    .document-card {
   width: 200px;
   height: 250px;
@@ -15,8 +15,14 @@
   cursor: pointer;
   word-wrap: break-word;
   }
-  }
-  
+
+.content{
+  height: 80%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}  
 .document-info {
   display: flex;
   flex-direction: row;
