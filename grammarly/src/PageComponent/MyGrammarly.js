@@ -32,6 +32,7 @@ function MyGrammarly() {
     await request.then((data) => {
       // Add the file to the list of uploaded files
       setUploadedFiles(prevFiles => [...prevFiles, file.name]);
+      setFile(null)
       alert("File uploaded successfully.");
     }).catch((err) => {
       console.log(err);
