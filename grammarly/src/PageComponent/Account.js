@@ -1,20 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../App.css";
 import Menu from "./Menu";
 
-function Account(props) {
-
-  /*const [profileData, setProfileData] = useState(null)
+function Account() {
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    getUsers();
+    const userId = localStorage.getItem("user_id");
+    if (userId) {
+      fetchUserData(userId);
+    }
   }, []);
 
-  const email = localStorage.getItem('email');*/
+  const fetchUserData = async (userId) => {
+    try {
+      const response = await axios.get(`http://127.0.0.1:5000/myaccount/${userId}`, {
+        withCredentials: true,
+      });
+      setUserData(response.data);
+    } catch (error) {
+      console.error("Error fetching user data", error);
+    }
+  };
 
-
-  
   return (
     <div className="container">
       <Menu />
@@ -25,22 +34,22 @@ function Account(props) {
         <div className="Name">
           <a>Name</a>
           <div className="userinfo">
-            <a>An An</a>
-            <a className="update">update </a>
+            <a>{userData?.name}</a>
+            {/* Add an update link or button here */}
           </div>
         </div>
         <div className="Email">
           <a>Email</a>
           <div className="userinfo">
-            <a>ansonansonanson1710@gmail.com</a>
-            <a className="update">update </a>
+            <a>{userData?.email}</a>
+            {/* Add an update link or button here */}
           </div>
         </div>
         <div className="Password">
           <a>Password</a>
           <div className="userinfo">
-            <a className="pass">ưdwwdwdawdawdawd</a>
-            <a className="update">update </a>
+            <a>{userData?.password}</a>
+            {/* Add an update link or button here */}
           </div>
         </div>
 
@@ -48,9 +57,12 @@ function Account(props) {
           <h2>About You</h2>
         </div>
 
-        <div>Premium: Active ? Not Active</div>
+        <div>Premium: {userData?.tier === "premium" ? "Active" : "Not Active"}</div>
       </div>
     </div>
   );
 }
+
 export default Account;
+
+
