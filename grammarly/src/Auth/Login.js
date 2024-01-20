@@ -41,6 +41,8 @@ function Login() {
         alert("Successfully Login");
         // Navigate to the main page
         navigate("/mainpage");
+        const user_id = response.data.id;
+        localStorage.setItem("user_id", user_id);
         
       })
       .catch((error) => {

@@ -16,8 +16,7 @@ function Account(props) {
 
   
   return (
-    <div className="container">
-      <Menu />
+    
       <div className="Account-container">
         <h1>Account Setting</h1>
         <hr></hr>
@@ -50,7 +49,7 @@ function Account(props) {
 
         <div>Premium: Active ? Not Active</div>
       </div>
-    </div>
+    
   );
 }
 export default Account;

@@ -100,8 +100,7 @@ function MyGrammarly() {
 
 
   return (
-    <div className="container">
-      <Menu />
+    
       <div className="content-container">
         <div className="DocumentList">
           <SearchBar />
@@ -154,7 +153,7 @@ function MyGrammarly() {
           </div>
         </div>
       </div>
-    </div>
+    
   );
 }
 export default MyGrammarly;

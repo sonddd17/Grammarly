@@ -146,7 +146,7 @@ function Register() {
         </div>
         <div className="question">
           <span className="switch-btn" onClick={onSwitchToSignIn}>
-          Already have an account ? Sign in
+          Already have an account ? Sign In
           </span>
         </div>
         <p className="text">Or Register using</p>

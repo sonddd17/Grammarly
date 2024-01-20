@@ -9,8 +9,7 @@ import SearchBar from "./SearchBar";
 import Menu from "./Menu";
 function Trash() {
   return (
-    <div className="container">
-      <Menu />
+    
       <div className="content-container">
         <div className="DocumentList">
           <SearchBar />
@@ -25,7 +24,7 @@ function Trash() {
           </div>
         </div>
       </div>
-    </div>
+    
   );
 }
 export default Trash;

@@ -31,8 +31,11 @@ function Menu() {
           // set the state to the item name
           setActiveItem(itemName);
           console.log(itemName);
+          
         }
     }
+
+
     
       function Logout() {
         axios({
@@ -54,6 +57,8 @@ function Menu() {
             }
         })
     }
+
+    
 
     return (
         <div className="Menu">

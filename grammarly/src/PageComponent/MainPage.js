@@ -69,16 +69,8 @@ function MainPage() {
       
         {" "}
         
-        <div className="PageContent">
-        <Routes>
-          <Route path="/" element={<MyGrammarly />} />
-          <Route path="/MyGrammarly" element={<MyGrammarly />} />
-          <Route path="/trash" element={<Trash />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/premium" element={<Premium />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </div>
+        
+      
       
     </div>
   );
