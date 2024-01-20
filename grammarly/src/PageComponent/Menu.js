@@ -6,11 +6,14 @@ import {
   FaTrashCan,
   FaPowerOff,
   FaRegStar,
+  FaPeopleGroup
 } from "react-icons/fa6";
 import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom"; // import React Router components
 import axios from "axios";
 import app_logo from '../assets/logo-color.png'
 import { useEffect, useState } from "react"; // import useState hook
+import AboutUs from "./about_us/AboutUs";
+
 
 function Menu() {
     const navigate = useNavigate();
@@ -92,12 +95,21 @@ function Menu() {
           </div>
 
           <div
-            className={`item ${activeItem === "Premium" ? "active" : ""}`}
-            onClick={() => handleClick("Premium")}
+            className={`item ${activeItem === "AboutUs" ? "active" : ""}`}
+            onClick={() => handleClick("AboutUs")}
+          >
+            <FaPeopleGroup />
+            <Link to="/about_us">About us</Link>
+          </div>
+
+          <div
+            className={`item ${activeItem === "SubscriptionPlan" ? "active" : ""}`}
+            onClick={() => handleClick("SubscriptionPlan")}
           >
             <FaRegStar />
-            <Link to={{ pathname: "/premium" }}>Premium</Link>
+            <Link to="/subscription_plan">Upgrade</Link>
           </div>
+
 
           <div
             className={`item ${activeItem === "Logout" ? "active" : ""}`}

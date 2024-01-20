@@ -34,22 +34,19 @@ function Account() {
         <div className="Name">
           <a>Name</a>
           <div className="userinfo">
-            <a>{userData?.name}</a>
-            {/* Add an update link or button here */}
+            <a>{userData?.name || "John Doe"}</a>
           </div>
         </div>
         <div className="Email">
           <a>Email</a>
           <div className="userinfo">
-            <a>{userData?.email}</a>
-            {/* Add an update link or button here */}
+            <a>{userData?.email || "john.doe@gmail.com"}</a>
           </div>
         </div>
         <div className="Password">
           <a>Password</a>
           <div className="userinfo">
-            <a>{userData?.password}</a>
-            {/* Add an update link or button here */}
+            <a>{userData?.password || ""}</a>
           </div>
         </div>
 

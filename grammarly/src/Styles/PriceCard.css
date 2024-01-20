@@ -1,0 +1,130 @@
+/* Price card */
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100vw;
+    overflow-y: hidden;
+    justify-content: space-between;
+}
+
+.price-card {
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 10px;
+    border: 1px solid #007bff;
+    text-align: center;
+}
+
+.price-card:hover {
+    background-color: #d7ebff;
+}
+
+.price-card:hover .card-price p {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.card-name {
+    color: #007bff;
+}
+
+.card-image {
+    color: #007bff;
+    margin: 1.5rem 0;
+}
+
+.pay-options {
+    color: #a8a8a8;
+}
+
+.target-customer {
+    text-align: left;
+    font-size: 16pt;
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+.features {
+    text-align: left;
+    list-style: none;
+    list-style-position: inside;
+    padding-left: 0;
+    color: #535353;
+}
+
+.features li {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.feature-list-icon {
+    color: #007bff;
+    margin-right: .5rem;
+}
+
+.button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    width: 220px;
+    height: 45px;
+    font-size: 14pt;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    /* align-items: start; */
+}
+
+.card-content h2 {
+    margin: 1rem 0;
+}
+
+.card-price {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: .5rem 0;
+}
+
+.card-price p {
+    margin: 0 1rem;
+    padding: 10px;
+    font-size: 10pt;
+    border-radius: 14px;
+    background-color: #E7EEFD;
+}
+
+/* Subscription page */
+.subscription-plans {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    margin-top: 50px;
+    margin-right: 100px;
+}
+
+.subscription-plans h1 {
+    margin: 1rem 0;
+}
+
+.subscription-plans > p {
+    margin: 6px 0;
+    color: #a8a8a8;
+}
+
+.plan {
+    display: flex; 
+    flex-direction: row;
+    flex: 1 1 1000px; 
+    max-width: 1000px;
+    max-height: 650px;
+}

@@ -1,0 +1,60 @@
+/* TeamMember.css */
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100vw;
+    overflow-y: hidden;
+    justify-content: space-between;
+}
+
+.team-member {
+    background-color: #f4f4f4;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    width: 300px;
+    margin: 10px;
+}
+
+.team-member:hover {
+    background-color: #B5CFDA;
+}
+
+.profile-image {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+
+}
+
+.role {
+    font-style: italic;
+    margin-bottom: 1rem;
+    color: #a8a8a8;
+}
+
+.bio {
+    margin: 1rem 1rem;
+}
+
+.social-links a {
+    margin: 0 5px;
+}
+
+.social-icon {
+    color: #333;
+}
+
+.social-icon:hover {
+    color: #555;
+}
+
+/* AboutUs.css */
+.about-us {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
