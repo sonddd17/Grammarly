@@ -12,7 +12,7 @@ const Router = () => {
     return (
         <BrowserRouter>
         <div className='container'>
-            <Menu />
+            
             <Routes>
                 <Route path='/' element={<Login />} />
                 <Route path='/login' element={<Login />} />

@@ -30,7 +30,8 @@ function Premium() {
   };
 
   return (
-    
+    <div className="container">
+      <Menu />
       <div className="Premium-container">
         <button onClick={handleBackward}>Backward</button>
 
@@ -59,7 +60,7 @@ function Premium() {
 
         <button onClick={handleForward}>Forward</button>
       </div>
-    
+    </div>
   );
 }
 

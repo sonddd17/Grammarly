@@ -43,6 +43,7 @@ function Login() {
         navigate("/mainpage");
         const user_id = response.data.id;
         localStorage.setItem("user_id", user_id);
+        localStorage.setItem("email", email);
         
       })
       .catch((error) => {

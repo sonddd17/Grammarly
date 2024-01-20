@@ -48,6 +48,7 @@ function Menu() {
           alert("Successfully Logout");
           // Navigate to the login page
           navigate("/login");
+          localStorage.clear();
             
         }).catch((error) => {
             if (error.response) {
