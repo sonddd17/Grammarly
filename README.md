@@ -172,10 +172,10 @@ npm start
 
 ## Authors and Contributions 
 
-- [Tri Lai - s3799602](https://github.com/Tri-Lai) (25%)
-- [Anh Phan - s3810148](https://github.com/s3810148) (25%)
-- [Son Tran - s3818468](https://github.com/sonddd17) (25%)
-- [Nhan Vu - s3810151](https://github.com/s3810151) (25%)
+- [Tri Lai - s3799602](https://github.com/Tri-Lai) (30%)
+- [Anh Phan - s3810148](https://github.com/s3810148) (20%)
+- [Son Tran - s3818468](https://github.com/sonddd17) (30%)
+- [Nhan Vu - s3810151](https://github.com/s3810151) (20%)
 
 
 ## Demo
