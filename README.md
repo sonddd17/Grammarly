@@ -127,8 +127,9 @@ Step 1: At root folder (GRAMMARLY), go to "backend" folder
 cd backend
 ```
 
-Step 2: Activate virtual environment
+Step 2: Create and Activate virtual environment
 ```bash
+python3 -m venv .venv
 source .venv/bin/activate                                                
 ```
 
