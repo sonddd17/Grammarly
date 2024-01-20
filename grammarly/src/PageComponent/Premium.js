@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Menu from "./Menu";
 
 function Premium() {
   // Use state to keep track of the current plan index
@@ -29,33 +30,36 @@ function Premium() {
   };
 
   return (
-    <div className="Premium-container">
-      <button onClick={handleBackward}>Backward</button>
+    <div className="container">
+      <Menu />
+      <div className="Premium-container">
+        <button onClick={handleBackward}>Backward</button>
 
-      <div>
-        {/* Render two buttons to control the current plan */}
+        <div>
+          {/* Render two buttons to control the current plan */}
 
-        {/* Map over the plans array and render a box for each plan */}
-        {plans.map((plan, index) => (
-          <div
-            key={index}
-            className="Premium-box"
-            id={index}
-            // Use a ternary operator to apply a different style if the plan is the current one
-            style={
-              index === current
-                ? { transform: "scale(1.2)", opacity: 1, order: 2 - index }
-                : null
-            }
-          >
-            <h1>{plan.name}</h1>
-            <div>{plan.detail}</div>
-            <div>{plan.price}</div>
-          </div>
-        ))}
+          {/* Map over the plans array and render a box for each plan */}
+          {plans.map((plan, index) => (
+            <div
+              key={index}
+              className="Premium-box"
+              id={index}
+              // Use a ternary operator to apply a different style if the plan is the current one
+              style={
+                index === current
+                  ? { transform: "scale(1.2)", opacity: 1, order: 2 - index }
+                  : null
+              }
+            >
+              <h1>{plan.name}</h1>
+              <div>{plan.detail}</div>
+              <div>{plan.price}</div>
+            </div>
+          ))}
+        </div>
+
+        <button onClick={handleForward}>Forward</button>
       </div>
-
-      <button onClick={handleForward}>Forward</button>
     </div>
   );
 }

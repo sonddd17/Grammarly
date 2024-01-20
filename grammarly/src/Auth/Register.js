@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Auth.css";
 
-function Register({ onRegisterSuccess}) {
+function Register() {
+  const navigate = useNavigate();
   // State variables for name, email, password, and re-entered password
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -75,7 +77,7 @@ function Register({ onRegisterSuccess}) {
       .then((response) => {
         console.log(response);
         alert("Successfully registered! Please log in.");
-        onRegisterSuccess();
+        navigate("/Login");
       })
       .catch((error) => {
         // If there's an error
@@ -96,6 +98,11 @@ function Register({ onRegisterSuccess}) {
     setReEnteredPassword("");
 
     // Here you can add logic to handle the registration
+  };
+
+  // Function to switch to sign in page
+  const onSwitchToSignIn = () => {
+    navigate("/login");
   };
 
   return (
@@ -137,9 +144,11 @@ function Register({ onRegisterSuccess}) {
         <div className="login-btn" onClick={handleRegister}>
           Register
         </div>
-
-        
-
+        <div className="question">
+          <span className="switch-btn" onClick={onSwitchToSignIn}>
+          Already have an account ? Sign in
+          </span>
+        </div>
         <p className="text">Or Register using</p>
         <div className="altLogin">
           <div className="facebook"></div>
