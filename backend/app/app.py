@@ -84,18 +84,22 @@ def logout_user():
 
 @app.route("/myaccount/<userid>", methods=["GET"])
 def myaccount(userid):
-    userid = session.get("user_id", None)
-    
-    if not userid:
+    stored_user_id = session.get("user_id", None)
+
+    if not stored_user_id or stored_user_id != int(userid):
         return jsonify({"error": "Unauthorized"}), 401
-    
+
     user = User.query.filter_by(id=userid).first()
+
+    if not user:
+        return jsonify({"error": "User not found"}), 404
 
     return jsonify({
         "id": user.id,
-        "name": user.name, # "name": "John Doe
+        "name": user.name,
         "email": user.email,
-        "tier" : user.tier
+        "password": user.password,  # Note: sending the password is not recommended
+        "tier": user.tier
     })
 
 
