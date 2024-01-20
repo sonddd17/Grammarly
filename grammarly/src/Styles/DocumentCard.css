@@ -1,5 +1,4 @@
-
-   .document-card {
+.document-card {
   width: 200px;
   height: 250px;
   display: flex;
@@ -15,14 +14,13 @@
   cursor: pointer;
   word-wrap: break-word;
   }
-
 .content{
   height: 80%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-}  
+}
 .document-info {
   display: flex;
   flex-direction: row;
@@ -50,6 +48,7 @@ button:hover {
 
 .icon-button {
   background: none;
+  
   border: none;
   cursor: pointer;
   padding: 5px;
@@ -57,9 +56,17 @@ button:hover {
   align-items: center;
   justify-content: center;
   color: #000; /* Or any color you prefer */
+  float: left;
+  cursor: pointer;
 }
 
 .icon-button:hover {
   background-color: #f9f9f9;
   color: #8ee2ce; /* Change for hover effect */
+}
+.textButton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
