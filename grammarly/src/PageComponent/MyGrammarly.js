@@ -25,7 +25,7 @@ function MyGrammarly() {
       Key: file.name,
       Body: file,
     }).on("httpUploadProgress", (event) => {
-        console.log("Uploading " + parseInt((event.loaded * 100) / event.total) + "%" );
+      console.log("Uploading " + parseInt((event.loaded * 100) / event.total) + "%");
     }).promise()
 
     await request.then((data) => {
@@ -46,41 +46,47 @@ function MyGrammarly() {
 
   const fetchFile = (fileName) => {
     return new Promise(async (resolve, reject) => {
-        try {
-            const s3 = await S3Singleton.getInstance();
-            s3.getObject(
-                {
-                    Bucket: S3_BUCKET,
-                    Key: fileName,
-                },
-                (err, data) => {
-                    if (err) {
-                      console.log(err);
-                      reject(err);
-                      return;
-                    }
-                    if (data) {
-                      const document = data.Body.toString('binary');
-                      resolve(document);
-                    }
-                }
-            );
-        } catch (e) {
-            console.log(e);
-            reject(e);
-        }
+      try {
+        const s3 = await S3Singleton.getInstance();
+        s3.getObject(
+          {
+            Bucket: S3_BUCKET,
+            Key: fileName,
+          },
+          (err, data) => {
+            if (err) {
+              console.log(err);
+              reject(err);
+              return;
+            }
+            if (data) {
+              const document = data.Body.toString('binary');
+              resolve(document);
+            }
+          }
+        );
+      } catch (e) {
+        console.log(e);
+        reject(e);
+      }
     });
   }
-
+  function generateUniqueId() {
+    return Date.now().toString(36) + Math.random().toString(36).substring(2);
+  }
+  const handleDelete = (id) => {
+    // Logic to handle deletion
+    setFetchedDocs(fetchedDocs.filter(doc => doc.id !== id));
+};
   const fetchAllFiles = async (uploadedFiles) => {
     const fetchedFiles = [];
     for (const fileName of uploadedFiles) {
-        try {
-            const fetchedFile = await fetchFile(fileName);
-            fetchedFiles.push({ fileName, fetchedFile });
-        } catch (e) {
-            console.log(`Error fetching file ${fileName}: `, e);
-        }
+      try {
+        const fetchedFile = await fetchFile(fileName);
+        fetchedFiles.push({ id: generateUniqueId(), fileName, fetchedFile });
+      } catch (e) {
+        console.log(`Error fetching file ${fileName}: `, e);
+      }
     }
     return fetchedFiles;
   }
@@ -95,7 +101,7 @@ function MyGrammarly() {
     if (uploadedFiles.length > 0) {
       fetchAndDisplayFiles();
     }
-  }, [uploadedFiles]); 
+  }, [uploadedFiles]);
 
 
   return (
@@ -106,24 +112,24 @@ function MyGrammarly() {
           <div className="file-upload-container">
             <div className="file-upload">
               <form onClick={() => document.querySelector(".input-field").click()}>
-                <input 
-                  type="file" 
-                  className='input-field' hidden 
-                  onChange={handleFileChange}/>
+                <input
+                  type="file"
+                  className='input-field' hidden
+                  onChange={handleFileChange} />
 
-                {file ? 
+                {file ?
                   <>
                     <FaCircleCheck onClick={() => uploadFile} color="#8ee2ce" size={60} />
-                    <br/>
+                    <br />
                     <p>Click below button to upload image...</p>
                   </>
-                : 
+                  :
                   <>
                     <FaFileArrowUp size={60} />
-                    <br/>
+                    <br />
                     <p> Browse Files to upload</p>
                   </>
-                } 
+                }
               </form>
             </div>
 
@@ -133,21 +139,21 @@ function MyGrammarly() {
                 {file == null ? "" : file.name}
               </span>
 
-              <FaTrashCan onClick={() => setFile(null)} color="#d52424"/>
+              <FaTrashCan onClick={() => setFile(null)} color="#d52424" />
             </section>
 
             <button className='upload-btn' onClick={uploadFile}>
-                <FaPaperPlane color='#ffffff' />
-                <p>Upload file</p>
+              <FaPaperPlane color='#ffffff' />
+              <p>Upload file</p>
             </button>
           </div>
 
           {/* Show fetched document as card view */}
           <div className="documents-container">
             {fetchedDocs.map(doc => (
-              <DocumentCard key={doc.fileName} doc={doc} />
+              <DocumentCard key={doc.id} doc={doc} onDelete={handleDelete} />
             ))}
-          </div>          
+          </div>
         </div>
       </div>
     </div>

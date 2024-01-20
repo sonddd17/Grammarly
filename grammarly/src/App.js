@@ -2,26 +2,15 @@ import React, { useState } from "react";
 import Register from "./Auth/Register.js";
 import Login from "./Auth/Login.js";
 import MainPage from "./PageComponent/MainPage";
-import useToken from "./Auth/useToken";
+
 import "./App.css";
 import "./configs/aws-exports.js";
 
 function App() {
-  const { token, setToken, removeToken } = useToken();
-
-  const [showRegister, setShowRegister] = useState(false);
-
-  const handleLoginSuccess = (newToken) => {
-    setToken(newToken);
-  };
-
-  const handleRegisterSuccess = () => {
-    setShowRegister(false);
-  };
+  
 
   return (
     <div>
-      <MainPage token={token} setToken={setToken} />
 
 
       {/* {token === null || token === undefined ? (
