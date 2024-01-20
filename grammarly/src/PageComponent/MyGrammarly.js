@@ -6,7 +6,8 @@ import "../Styles/Uploader.css";
 import "../Styles/DocumentCard.css";
 import S3Singleton from "../models/S3Singleton";
 import { S3_BUCKET } from "../models/S3Singleton";
-
+import Menu from "./Menu";
+import '../Styles/Homepage.css'
 
 function MyGrammarly() {
 
@@ -77,7 +78,7 @@ function MyGrammarly() {
   const handleDelete = (id) => {
     // Logic to handle deletion
     setFetchedDocs(fetchedDocs.filter(doc => doc.id !== id));
-};
+  };
   const fetchAllFiles = async (uploadedFiles) => {
     const fetchedFiles = [];
     for (const fileName of uploadedFiles) {
@@ -105,58 +106,62 @@ function MyGrammarly() {
 
 
   return (
-    <div className="content-container">
-      <div className="DocumentList">
-        <SearchBar />
-        <div className="newDocumentItem">
-          <div className="file-upload-container">
-            <div className="file-upload">
-              <form onClick={() => document.querySelector(".input-field").click()}>
-                <input
-                  type="file"
-                  className='input-field' hidden
-                  onChange={handleFileChange} />
+    <div className="root">
+      <Menu />
+      <div className="content-container">
+        <div className="DocumentList">
+          <SearchBar />
+          <div className="newDocumentItem">
+            <div className="file-upload-container">
+              <div className="file-upload">
+                <form onClick={() => document.querySelector(".input-field").click()}>
+                  <input
+                    type="file"
+                    className='input-field' hidden
+                    onChange={handleFileChange} />
 
-                {file ?
-                  <>
-                    <FaCircleCheck onClick={() => uploadFile} color="#8ee2ce" size={60} />
-                    <br />
-                    <p>Click below button to upload image...</p>
-                  </>
-                  :
-                  <>
-                    <FaFileArrowUp size={60} />
-                    <br />
-                    <p> Browse Files to upload</p>
-                  </>
-                }
-              </form>
+                  {file ?
+                    <>
+                      <FaCircleCheck onClick={() => uploadFile} color="#8ee2ce" size={60} />
+                      <br />
+                      <p>Click below button to upload image...</p>
+                    </>
+                    :
+                    <>
+                      <FaFileArrowUp size={60} />
+                      <br />
+                      <p> Browse Files to upload</p>
+                    </>
+                  }
+                </form>
+              </div>
+
+              <section className='selected-file-row'>
+                <span className='upload-content'>
+                  <FaFileImage />
+                  {file == null ? "" : file.name}
+                </span>
+
+                <FaTrashCan onClick={() => setFile(null)} color="#d52424" />
+              </section>
+
+              <button className='upload-btn' onClick={uploadFile}>
+                <FaPaperPlane color='#ffffff' />
+                <p>Upload file</p>
+              </button>
             </div>
 
-            <section className='selected-file-row'>
-              <span className='upload-content'>
-                <FaFileImage />
-                {file == null ? "" : file.name}
-              </span>
-
-              <FaTrashCan onClick={() => setFile(null)} color="#d52424" />
-            </section>
-
-            <button className='upload-btn' onClick={uploadFile}>
-              <FaPaperPlane color='#ffffff' />
-              <p>Upload file</p>
-            </button>
-          </div>
-
-          {/* Show fetched document as card view */}
-          <div className="documents-container">
-            {fetchedDocs.map(doc => (
-              <DocumentCard key={doc.id} doc={doc} onDelete={handleDelete} />
-            ))}
+            {/* Show fetched document as card view */}
+            <div className="documents-container">
+              {fetchedDocs.map(doc => (
+                <DocumentCard key={doc.id} doc={doc} onDelete={handleDelete} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
     </div>
+
   );
 }
 export default MyGrammarly;
